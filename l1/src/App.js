@@ -1,9 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import { Message } from './componets/Message';
-
 const myText = "Hello World!"
-
 function App() {
   return (
     <div className="App">
