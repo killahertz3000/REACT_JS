@@ -1,24 +1,44 @@
 import logo from './logo.svg';
 import './App.css';
 import { Message } from './componets/Message';
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Form } from './componets/Form';
 import { AUTHORS } from './utils/constants';
 
-function App() {
-  const [messageList, setMessageList] = useState([
+const chats = [
+  { name: "Chat1", id: "1" },
+  { name: "Chat2", id: "2" },
+];
 
-  ]);
+function App() {
+  const [messageList, setMessageList] = useState([]);
+  const messagesEnd = useRef();
 
   const handleAddMessage = (text) => {
+    sendMessage(text, AUTHORS.ME);
+  };
+
+  const sendMessage = (text, author) => {
     const newMessage = {
       text,
-      author: AUTHORS.ME,
-    }
+      author,
+      id: `msg-${Date.now()}`,
+    };
     setMessageList((prevMessageList) => [...prevMessageList, newMessage]);
-  }
+  };
+
+  // const handleAddMessage = (text) => {
+  //   const newMessage = {
+  //     text,
+  //     author: AUTHORS.ME,
+  //     id: `msg-${Date.now()}`,
+  //   }
+  //   setMessageList((prevMessageList) => [...prevMessageList, newMessage]);
+  // }
 
   useEffect(() => {
+    messagesEnd.current?.scrollIntoView();
+
     let timeout;
     if (messageList[messageList.length - 1]?.author === AUTHORS.ME) {
         timeout = setTimeout(() => {
@@ -36,16 +56,19 @@ function App() {
   }, [messageList]);
 
   return (
-    <div className="App">
+    <div  className="App" >
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        {messageList.map((message) => (
-          <Message
-            text={message.text}
-            author={message.author}
-          />
-        ))}
-        <Form onSubmit={handleAddMessage}/>
+        <div key={handleAddMessage.id}>
+          {messageList.map((message) => (
+            <Message
+              text={message.text}
+              author={message.author}
+            />
+          ))}
+        </div >
+        <div ref={messagesEnd} />
+        <Form onSubmit={handleAddMessage} />
       </header>
     </div>
   );
