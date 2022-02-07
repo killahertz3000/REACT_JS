@@ -28,12 +28,7 @@ export const Form = ({ onSubmit }) => {
                 onChange={handlerChange}
                 type="text"
             />
-            <Button>Send</Button>
+            <Button type="submit">Send</Button>
         </form>
-
-        // <form onSubmit={handleSubmit}>
-        //     <input value={value} ref={textField} onChange={handlerChange} type="text"/>
-            // <input type="submit"/>
-        // </form>
     );
 };

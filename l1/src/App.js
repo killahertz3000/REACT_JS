@@ -59,6 +59,13 @@ function App() {
     <div  className="App" >
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
+        <div className="chats">
+          <ul>
+            {chats.map((chat) => (
+            <li key={chat.id}>{chat.name}</li>
+            ))}
+          </ul>
+        </div>
         <div key={handleAddMessage.id}>
           {messageList.map((message) => (
             <Message
