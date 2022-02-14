@@ -24,7 +24,7 @@ export const Form = ({ onSubmit }) => {
         <form onSubmit={handleSubmit}>
             <TextField
                 value={value}
-                ref={textField}
+                inputRef={textField}
                 onChange={handlerChange}
                 type="text"
             />
