@@ -29,12 +29,15 @@ export function Chat() {
   };
 
   const sendMessage = (text, author) => {
-    const newMessage = {
+    const newMsg = {
       text,
       author,
       id: `msg-${Date.now()}`,
     };
-    setMessageList((prevMessageList) => [...prevMessageList, newMessage]);
+    setMessageList((prevMessageList) => ({
+      ...prevMessageList,
+      [chatId]: [...prevMessageList[chatId], newMsg],
+    }));
   };
 
   useEffect(() => {
@@ -46,8 +49,8 @@ export function Chat() {
       AUTHORS.ME
     ) {
       timeout = setTimeout(() => {
-        sendMessage("still here", AUTHORS.BOT);
-      }, 1000);
+        sendMessage("Hello human!", AUTHORS.BOT);
+      }, 2000);
     }
 
     return () => clearTimeout(timeout);
@@ -59,14 +62,9 @@ export function Chat() {
 
   return (
     <div  className="App" >
-        <ChatList />
+        {/* <ChatList /> */}
       <header className="App-header">
         <div className="chats">
-          <ul>
-            {chats.map((chat) => (
-            <li key={chat.id}>{chat.name}</li>
-            ))}
-          </ul>
         </div>
         <div>
             <MessageList messages={messageList[chatId]} />

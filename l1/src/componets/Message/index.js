@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import "./style.css";
+// import "./style.css";
 
 export const Message = ({ text, author }) => {
   return (
