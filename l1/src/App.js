@@ -1,5 +1,11 @@
-import { Router } from "./componets/Router";
+import { Provider } from "react-redux";
+import { Router } from "../src/componets/Router";
+import { store } from './Store';
 
-const App = () => <Router />;
+const App = () => (
+  <Provider store={store}>
+    <Router />
+  </Provider>
+);
 
 export default App;
